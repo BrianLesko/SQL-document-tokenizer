@@ -62,18 +62,23 @@ def main():
 
     for name in unique_names:
         st.caption(name)
-        document = sql.query(f"SELECT content FROM content WHERE name = '{name}'")[0]['content']
-        st.write(f"There are this many characters in the document: {len(document)}")
-        tokens = chunk_documents.tokenizer.tokenize(document)
-        st.write(f"There are this many tokens in the document: {len(tokens)}")
+        try:
+            document = sql.query(f"SELECT content FROM content WHERE name = '{name}'")[0]['content']
+            st.write(f"There are this many characters in the document: {len(document)}")
+            tokens = chunk_documents.tokenizer.tokenize(document)
+            st.write(f"There are this many tokens in the document: {len(tokens)}")
 
-        with st.spinner("Chunking the document..."):
-            chunks = chunk_documents.chunk_document(tokens, min_chunk_size=300, max_chunk_size=800)
-            st.write(f"There are this many chunks in the document: {len(chunks)}")
+            with st.spinner("Chunking the document..."):
+                chunks = chunk_documents.chunk_document(tokens, min_chunk_size=300, max_chunk_size=800)
+                #st.write(f"There are this many chunks in the document: {len(chunks)}")
 
-        # Write to a new row
-        for i, chunk in enumerate(chunks):
-            sql.cursor.execute("INSERT INTO chunks (source, chunk_number, content) VALUES (%s, %s, %s);", (name, i, chunk))
-        st.write(f"{i} Chunks have been added to the database.")
-        sql.connection.commit()
+            # Write to a new row
+            for i, chunk in enumerate(chunks):
+                sql.cursor.execute("INSERT INTO chunks (source, chunk_number, content) VALUES (%s, %s, %s);", (name, i, chunk))
+            st.write(f"{i+1} Chunks have been added to the database.")
+            sql.connection.commit()
+        except:
+            st.write(f"{name} does not exist")
+        st.stop()
+        
 main()
