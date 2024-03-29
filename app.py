@@ -47,7 +47,10 @@ def main():
     names = sql.query("SELECT name FROM content;")
     st.write(f"{len(library)} Documents in the library.")
     st.write(f"{len(names)} Names in the library.")
-    st.write(f"About to Write to the database.")
+
+
+    if not st.button("Write to the SQL Database?"):
+        st.stop()
 
     for j, document in enumerate(library):
         document = document['content']
