@@ -73,6 +73,11 @@ class SQLConnectDocker:
     def get_summary(self):
         self.cursor.execute("SHOW DATABASES;")
         return self.cursor.fetchall()
+    
+    def get_tables(self):
+        self.cursor.execute("USE user")   
+        self.cursor.execute("SHOW TABLES")
+        return self.cursor.fetchall()
 
     def query(self, query):
         try:
