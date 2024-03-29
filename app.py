@@ -79,6 +79,5 @@ def main():
             sql.connection.commit()
         except:
             st.write(f"{name} does not exist")
-        st.stop()
         
 main()
