@@ -11,7 +11,7 @@ import chunk_documents
 import pandas as pd
 
 def main(): 
-    gui.setup(wide=True, text="Chunk Documents, no overlap, use scentance or token ends and have a min and max chunk size by token.")
+    gui.setup(wide=True, text="Chunk Documents")
     st.title('Chunk Documents')
     current_task = st.empty()
 
