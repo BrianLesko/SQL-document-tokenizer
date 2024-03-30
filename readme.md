@@ -1,6 +1,11 @@
 
-# Text Compression from an PDF file
-This code implements text parsing from a PDF File and then text compression
+# Document Chunking
+
+This code takes long text as an input and chunks the text into smaller groups. 
+
+Chunks are split at sentance boundaries after a minimum number of "tokens" has been reached, also each chunk has one overlapping sentance with its neighbors by default. 
+
+This chunking schema is useful for text similarity search and natural language processing tasks such as NVIDIA's chat with RTX. 
 
 &nbsp;
 
@@ -8,8 +13,7 @@ This code implements text parsing from a PDF File and then text compression
 
 This code uses the following libraries:
 - `streamlit`: for building the user interface.
-- `pyobjc`: for the PDF text extraction.
-- `lz4`: for compressing the encoded text.
+- `pandas`: for manipulating dataframes 
 
 &nbsp;
 
@@ -17,7 +21,6 @@ This code uses the following libraries:
 
 Run the following commands:
 ```
-pip install --upgrade streamlit zipfile bs4
 streamlit run app.py
 ```
 
@@ -28,8 +31,8 @@ This will start the local Streamlit server, and you can access the chatbot by op
 ## Topics 
 ```
 Python | Streamlit | Git | Low Code UI
-text scraping | textual data | books
-Self taught coding | Mechanical engineer | Robotics engineer
+text scraping | textual data | NLP | token
+Learning purposes | Mechanical engineer & Robotics engineer | Masters Graduate | Ohio State
 ```
 &nbsp;
 
